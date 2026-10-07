@@ -1,0 +1,592 @@
+/* CV web · Uíliam Mateu Martins */
+:root {
+    --fondo: #f6f7f9;
+    --superficie: #ffffff;
+    --lateral: #0f1b24;
+    --lateral-texto: #e6edf2;
+    --lateral-suave: #9fb1bf;
+    --texto: #1b2730;
+    --suave: #5b6b77;
+    --linea: #dfe4e8;
+    --acento: #0f8a72;
+    --acento-claro: #e3f4ef;
+    --chip: #1d2f3b;
+    --radio: 12px;
+    --sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Code', Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --fondo: #0b1217;
+        --superficie: #121c23;
+        --lateral: #08151d;
+        --texto: #e3e9ee;
+        --suave: #9aabb8;
+        --linea: #22313b;
+        --acento: #3cc6a6;
+        --acento-claro: #123029;
+        --chip: #1a2c37;
+    }
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--texto);
+    background: var(--fondo);
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: var(--acento);
+    text-underline-offset: 3px;
+}
+
+code {
+    font-family: var(--mono);
+}
+
+svg {
+    width: 18px;
+    height: 18px;
+    flex: none;
+    fill: currentColor;
+}
+
+.saltar {
+    position: absolute;
+    left: -9999px;
+}
+
+.saltar:focus {
+    left: 16px;
+    top: 16px;
+    z-index: 10;
+    padding: 8px 12px;
+    background: var(--superficie);
+}
+
+/* Estructura: lateral + contenido */
+.pagina {
+    display: grid;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+@media (min-width: 900px) {
+    .pagina {
+        grid-template-columns: 340px 1fr;
+        gap: 32px;
+        padding: 32px 24px;
+        align-items: start;
+    }
+
+    .lateral {
+        position: sticky;
+        top: 32px;
+        max-height: calc(100vh - 64px);
+        overflow-y: auto;
+        border-radius: var(--radio);
+        scrollbar-width: thin;
+    }
+}
+
+/* Lateral */
+.lateral {
+    padding: 32px 24px;
+    color: var(--lateral-texto);
+    background: var(--lateral);
+}
+
+.foto {
+    display: block;
+    width: 132px;
+    height: 132px;
+    margin-bottom: 18px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--acento);
+}
+
+.nombre {
+    margin: 0;
+    font-size: 1.75rem;
+    line-height: 1.15;
+    letter-spacing: -.01em;
+}
+
+.puesto {
+    margin: 6px 0 4px;
+    font-weight: 500;
+    color: var(--lateral-texto);
+}
+
+.stack {
+    margin: 0 0 20px;
+    font-size: .9rem;
+    color: #7fe0c8;
+}
+
+.contacto {
+    display: grid;
+    gap: 8px;
+    margin: 0 0 20px;
+    padding: 0;
+    list-style: none;
+    font-size: .95rem;
+}
+
+.contacto li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    color: var(--lateral-suave);
+}
+
+.contacto a {
+    color: var(--lateral-texto);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+}
+
+.contacto a:hover,
+.contacto a:focus-visible {
+    color: #7fe0c8;
+    text-decoration: underline;
+}
+
+.boton {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    font-weight: 600;
+    color: #06231c;
+    text-decoration: none;
+    background: #3cc6a6;
+    border-radius: 8px;
+    transition: background-color .2s;
+}
+
+.boton:hover,
+.boton:focus-visible {
+    background: #6fdcc2;
+}
+
+.bloque-lateral {
+    margin-top: 28px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255, 255, 255, .1);
+}
+
+.bloque-lateral h2 {
+    margin: 0 0 14px;
+    font-size: .8rem;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--lateral-suave);
+}
+
+.competencias {
+    margin: 0;
+}
+
+.competencias dt {
+    margin: 14px 0 6px;
+    font-size: .85rem;
+    font-weight: 600;
+    color: var(--lateral-texto);
+}
+
+.competencias dt:first-child {
+    margin-top: 0;
+}
+
+.competencias dd {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+}
+
+.competencias span {
+    padding: 3px 9px;
+    font-family: var(--mono);
+    font-size: .78rem;
+    color: var(--lateral-texto);
+    background: var(--chip);
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 6px;
+}
+
+.idiomas {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: .92rem;
+}
+
+.idiomas li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.idiomas li span:last-child {
+    text-align: right;
+    color: var(--lateral-suave);
+}
+
+/* Contenido principal */
+.principal {
+    padding: 8px 20px 40px;
+}
+
+@media (min-width: 900px) {
+    .principal {
+        padding: 8px 0 40px;
+    }
+}
+
+.principal section {
+    margin-top: 36px;
+}
+
+.principal h2 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 18px;
+    font-size: 1.25rem;
+    letter-spacing: -.01em;
+}
+
+.principal h2::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--linea);
+}
+
+.perfil {
+    margin: 0;
+    font-size: 1.08rem;
+    line-height: 1.7;
+}
+
+/* Línea de tiempo de experiencia */
+.linea {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.puesto-item {
+    position: relative;
+    padding: 0 0 26px 26px;
+    border-left: 2px solid var(--linea);
+}
+
+.puesto-item:last-child {
+    padding-bottom: 0;
+}
+
+.puesto-item::before {
+    content: "";
+    position: absolute;
+    left: -7px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    background: var(--superficie);
+    border: 2px solid var(--acento);
+    border-radius: 50%;
+}
+
+.puesto-item:first-child::before {
+    background: var(--acento);
+}
+
+.cabecera-item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2px 16px;
+}
+
+.cabecera-item h3 {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.4;
+}
+
+.empresa {
+    font-weight: 400;
+    color: var(--suave);
+}
+
+.etiqueta {
+    display: inline-block;
+    margin-left: 4px;
+    padding: 1px 8px;
+    font-size: .72rem;
+    font-weight: 500;
+    vertical-align: 2px;
+    color: var(--acento);
+    background: var(--acento-claro);
+    border-radius: 999px;
+}
+
+.fecha {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: .85rem;
+    white-space: nowrap;
+    color: var(--suave);
+}
+
+.puesto-item ul {
+    margin: 8px 0 0;
+    padding-left: 1.1em;
+}
+
+.puesto-item li + li {
+    margin-top: 3px;
+}
+
+/* Proyectos */
+.proyectos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+}
+
+.proyecto {
+    display: flex;
+    flex-direction: column;
+    padding: 18px;
+    background: var(--superficie);
+    border: 1px solid var(--linea);
+    border-radius: var(--radio);
+    transition: border-color .2s, transform .2s;
+}
+
+.proyecto:hover {
+    border-color: var(--acento);
+    transform: translateY(-2px);
+}
+
+.proyecto h3 {
+    margin: 0 0 6px;
+    font-size: 1rem;
+}
+
+.proyecto h3 a {
+    color: var(--texto);
+    text-decoration: none;
+}
+
+.proyecto h3 a:hover,
+.proyecto h3 a:focus-visible {
+    color: var(--acento);
+    text-decoration: underline;
+}
+
+.proyecto p {
+    margin: 0 0 12px;
+    font-size: .93rem;
+    color: var(--suave);
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: auto !important;
+    margin-bottom: 0 !important;
+}
+
+.tags code {
+    padding: 2px 8px;
+    font-size: .75rem;
+    color: var(--acento);
+    background: var(--acento-claro);
+    border-radius: 6px;
+}
+
+.mas {
+    margin: 14px 0 0;
+    font-weight: 500;
+}
+
+/* Formación y certificaciones */
+.lista-simple {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.lista-simple li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 4px 16px;
+    padding: 14px 18px;
+    background: var(--superficie);
+    border: 1px solid var(--linea);
+    border-radius: var(--radio);
+}
+
+.lista-simple strong {
+    display: block;
+}
+
+.lista-simple span {
+    font-size: .93rem;
+    color: var(--suave);
+}
+
+/* Pie */
+.pie {
+    padding: 24px 16px 40px;
+    text-align: center;
+    font-size: .88rem;
+    color: var(--suave);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Impresión: currículum limpio en papel */
+@media print {
+    @page {
+        margin: 14mm;
+    }
+
+    :root {
+        --fondo: #fff;
+        --superficie: #fff;
+        --texto: #111;
+        --suave: #444;
+        --linea: #ccc;
+        --acento: #0a6b58;
+        --acento-claro: #fff;
+    }
+
+    html {
+        font-size: 8.5pt;
+    }
+
+    body {
+        line-height: 1.4;
+    }
+
+    .nombre {
+        font-size: 2rem;
+    }
+
+    .principal section,
+    .bloque-lateral {
+        margin-top: 12px;
+        padding-top: 0;
+    }
+
+    .principal h2 {
+        margin-bottom: 8px;
+        font-size: 1.3rem;
+    }
+
+    .perfil {
+        font-size: 1rem;
+    }
+
+    .puesto-item {
+        padding-bottom: 10px;
+    }
+
+    .proyectos {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .proyecto,
+    .lista-simple li {
+        padding: 8px 10px;
+    }
+
+    .contacto a[href*="linkedin"]::after {
+        content: " (linkedin.com/in/uiliam-mateu-3770a722a)";
+    }
+
+    .pagina {
+        display: grid;
+        grid-template-columns: 34% 1fr;
+        gap: 8mm;
+        padding: 0;
+        align-items: start;
+    }
+
+    .lateral {
+        position: static;
+        max-height: none;
+        padding: 0;
+        color: #111;
+        background: none;
+    }
+
+    .lateral * {
+        color: #111 !important;
+    }
+
+    .foto,
+    .boton,
+    .saltar,
+    .pie,
+    .mas,
+    .contacto svg {
+        display: none;
+    }
+
+    .competencias span {
+        background: none;
+        border-color: #bbb;
+    }
+
+    .bloque-lateral {
+        border-top-color: #ccc;
+    }
+
+    .principal {
+        padding: 0;
+    }
+
+    .puesto-item,
+    .proyecto,
+    .lista-simple li {
+        break-inside: avoid;
+    }
+}
